@@ -5,14 +5,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D _playerRigidBody;
+    private PlayerAnimations _playerAnim;
     [SerializeField] private float _jumpForce = 5.0f;
+    [SerializeField] private float _speed = 2.5f;
     private bool _resetJump = false;
     void Start()
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
+        _playerAnim = GetComponent<PlayerAnimations>();
+
         if (_playerRigidBody == null)
         {
             Debug.LogError("Player rigidbody is Null");
+        }
+
+        if (_playerAnim == null)
+        {
+            Debug.LogError("Player Animation Script is Null");
         }
     }
 
@@ -25,13 +34,14 @@ public class Player : MonoBehaviour
     {
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
 
-        _playerRigidBody.velocity = new Vector2(horizontalMovement, _playerRigidBody.velocity.y);
-
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _playerRigidBody.velocity = new Vector2(_playerRigidBody.velocity.x, _jumpForce);
             StartCoroutine(ResetJumpRoutine());
         }
+
+        _playerRigidBody.velocity = new Vector2(horizontalMovement * _speed, _playerRigidBody.velocity.y);
+        _playerAnim.Move(horizontalMovement);
     }
 
     private bool IsGrounded()
