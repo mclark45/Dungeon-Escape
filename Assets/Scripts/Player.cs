@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce = 5.0f;
     [SerializeField] private float _speed = 2.5f;
     private bool _resetJump = false;
+    private bool _grounded;
     void Start()
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
@@ -33,11 +34,13 @@ public class Player : MonoBehaviour
     private void PlayerMovement()
     {
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        _grounded = IsGrounded();
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && _grounded)
         {
             _playerRigidBody.velocity = new Vector2(_playerRigidBody.velocity.x, _jumpForce);
             StartCoroutine(ResetJumpRoutine());
+            _playerAnim.Jump(true);
         }
 
         _playerRigidBody.velocity = new Vector2(horizontalMovement * _speed, _playerRigidBody.velocity.y);
@@ -51,7 +54,10 @@ public class Player : MonoBehaviour
         if (hit.collider != null)
         {
             if (_resetJump == false)
+            {
+                _playerAnim.Jump(false);
                 return true;
+            }
         }
 
         return false;

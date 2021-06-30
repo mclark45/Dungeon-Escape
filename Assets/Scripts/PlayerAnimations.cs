@@ -6,6 +6,8 @@ public class PlayerAnimations : MonoBehaviour
 {
     private Animator _playerAnimations;
     private SpriteRenderer _playerSpriteRender;
+    private float _playerSpritesXAxis;
+    [SerializeField] private Transform _playerSpritePosition;
     void Start()
     {
         _playerAnimations = GetComponentInChildren<Animator>();
@@ -29,15 +31,24 @@ public class PlayerAnimations : MonoBehaviour
         FlipSprite(horizontalMovement);
     }
 
+    public void Jump(bool jumping)
+    {
+        _playerAnimations.SetBool("Jumping", jumping);
+    }
+
     private void FlipSprite(float horizontalMovement)
     {
         if (horizontalMovement < 0f)
         {
             _playerSpriteRender.flipX = true;
+            _playerSpritesXAxis = -0.09f;
         }
         else if (horizontalMovement > 0f)
         {
             _playerSpriteRender.flipX = false;
+            _playerSpritesXAxis = 0.09f;
         }
+
+        _playerSpritePosition.localPosition = new Vector2(_playerSpritesXAxis, 0.2f);
     }
 }
