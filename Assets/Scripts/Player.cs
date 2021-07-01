@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        PlayerAttack(_grounded);
     }
 
     private void PlayerMovement()
@@ -45,6 +46,14 @@ public class Player : MonoBehaviour
 
         _playerRigidBody.velocity = new Vector2(horizontalMovement * _speed, _playerRigidBody.velocity.y);
         _playerAnim.Move(horizontalMovement);
+    }
+
+    private void PlayerAttack(bool grounded)
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && grounded == true)
+        {
+            _playerAnim.Attack();
+        }
     }
 
     private bool IsGrounded()
