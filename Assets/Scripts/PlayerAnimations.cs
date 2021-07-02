@@ -10,8 +10,9 @@ public class PlayerAnimations : MonoBehaviour
     private SpriteRenderer _swordEffectsSpriteRenderer;
     private Transform _playerSpritePosition;
     private Transform _swordEffectsSpritePosition;
-    private float _spritesXAxis;
-    private float _spritesYAxis;
+    private float _playerSpritesXAxis;
+    private float _swordSpritesXAxis;
+    private float _swordSpritesYAxis;
     void Start()
     {
         _playerAnimations = GetComponentInChildren<Animator>();
@@ -76,22 +77,26 @@ public class PlayerAnimations : MonoBehaviour
         if (horizontalMovement < 0f)
         {
             _playerSpriteRender.flipX = true;
-            _spritesXAxis = -0.09f;
+            _playerSpritesXAxis = -0.09f;
             _swordEffectsSpriteRenderer.flipY = true;
             _swordEffectsSpriteRenderer.sortingOrder = 50;
-            _spritesYAxis = -0.2f;
+            _swordEffectsSpritePosition.localRotation = Quaternion.Euler(-70, 48, -80);
+            _swordSpritesXAxis = -0.2f;
+            _swordSpritesYAxis = -0.2f;
         }
         else if (horizontalMovement > 0f)
         {
             _playerSpriteRender.flipX = false;
-            _spritesXAxis = 0.09f;
+            _playerSpritesXAxis = 0.09f;
             _swordEffectsSpriteRenderer.flipY = false;
             _swordEffectsSpriteRenderer.sortingOrder = 51;
-            _spritesYAxis = 0.2f;
+            _swordEffectsSpritePosition.localRotation = Quaternion.Euler(70, 48, -80);
+            _swordSpritesXAxis = 0f;
+            _swordSpritesYAxis = 0.2f;
         }
 
-        _playerSpritePosition.localPosition = new Vector2(_spritesXAxis, 0.2f);
-        _swordEffectsSpritePosition.localPosition = new Vector2(0, _spritesYAxis);
+        _playerSpritePosition.localPosition = new Vector2(_playerSpritesXAxis, 0.2f);
+        _swordEffectsSpritePosition.localPosition = new Vector2(_swordSpritesXAxis, _swordSpritesYAxis);
     }
 
     IEnumerator SwordArc()
