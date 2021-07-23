@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655580942634789614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655580942983342724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider_Point_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5655580942983342727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.41, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 5655580942634789614}
@@ -74,7 +74,8 @@ GameObject:
   - component: {fileID: 5655580943887442654}
   - component: {fileID: 5655580943887442652}
   - component: {fileID: 5655580943887442655}
-  m_Layer: 0
+  - component: {fileID: 7118099883535755495}
+  m_Layer: 8
   m_Name: Spider_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5655580943887442649}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -166,6 +167,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7118099883535755495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655580943887442649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343097b1a53893e4b931cb6fdabdd8e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acid: {fileID: 2694336830351558601, guid: ba21a88d5b5e67a41b2bcffbd6861e3a, type: 3}
 --- !u!1 &5655580943981831250
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +190,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5655580943981831248}
   - component: {fileID: 5655580943981831251}
-  m_Layer: 0
+  - component: {fileID: 1015394920}
+  m_Layer: 8
   m_Name: Spider_Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,11 +225,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71eff4bc63125a42ba54cf7f924aefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  speed: 1
+  health: 1
+  speed: 0
   gems: 0
   pointA: {fileID: 5655580944208901845}
   pointB: {fileID: 5655580942983342724}
+--- !u!61 &1015394920
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655580943981831250}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0281353, y: -0.23446995}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0562706, y: 0.5310601}
+  m_EdgeRadius: 0
 --- !u!1 &5655580944208901844
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655580944208901845}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider_Point_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

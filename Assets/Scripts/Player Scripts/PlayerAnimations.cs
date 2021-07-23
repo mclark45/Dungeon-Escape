@@ -57,7 +57,13 @@ public class PlayerAnimations : MonoBehaviour
     {
         _playerAnimations.SetFloat("Speed", Mathf.Abs(horizontalMovement));
 
-        FlipSprite(horizontalMovement);
+        if (horizontalMovement > 0)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+
+        if (horizontalMovement < 0)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        //FlipSprite(horizontalMovement);
     }
 
     public void Jump(bool jumping)
@@ -97,6 +103,11 @@ public class PlayerAnimations : MonoBehaviour
 
         _playerSpritePosition.localPosition = new Vector2(_playerSpritesXAxis, 0.2f);
         _swordEffectsSpritePosition.localPosition = new Vector2(_swordSpritesXAxis, _swordSpritesYAxis);
+    }
+
+    public void DeathAnimation()
+    {
+        _playerAnimations.SetTrigger("Death");
     }
 
     IEnumerator SwordArc()
