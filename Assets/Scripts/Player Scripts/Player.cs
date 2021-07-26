@@ -8,14 +8,16 @@ public class Player : MonoBehaviour, IDamageable
     private PlayerAnimations _playerAnimations;
     [SerializeField] private float _jumpForce = 5.0f;
     [SerializeField] private float _speed = 2.5f;
+    [SerializeField] private int _gems = 0;
     private bool _resetJump = false;
     private bool _grounded;
     private bool _isDead = false;
     private bool _isAttacking = false;
+    private bool _shopOpen = false;
     private float _horizontal;
 
     public float Health { get; set; }
-    [SerializeField] private float health = 3.0f;
+    [SerializeField] private float health = 4.0f;
 
     void Start()
     {
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void PlayerAttack(bool grounded)
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && grounded == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && grounded == true && _shopOpen == false)
         {
             StartCoroutine(IsAttacking());
             _playerAnimations.Attack();
@@ -85,11 +87,43 @@ public class Player : MonoBehaviour, IDamageable
     {
         Health--;
 
+        UIManager.Instance.HealthHUD((int) Health);
+
         if (Health < 1f)
         {
             _isDead = true;
-            StartCoroutine(Die());
+            _playerAnimations.DeathAnimation();
+            Physics2D.IgnoreLayerCollision(7, 9);
         }
+    }
+
+    public void Score(int diamond)
+    {
+        _gems += diamond;
+        UIManager.Instance.Score(_gems);
+    }
+
+    public void UsedGems(int cost)
+    {
+        if (cost <= _gems)
+        {
+            _gems -= cost;
+            UIManager.Instance.UpdatePlayerGemCount(_gems);
+            UIManager.Instance.Score(_gems);
+
+            if (cost == 100)
+                GameManager.Instance.HasKeyToCastle = true;
+        }
+    }
+
+    public int Gems()
+    {
+        return _gems;
+    }
+
+    public void ShopOpen(bool open)
+    {
+        _shopOpen = open;
     }
 
     IEnumerator ResetJumpRoutine()

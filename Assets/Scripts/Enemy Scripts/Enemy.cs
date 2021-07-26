@@ -7,6 +7,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected float speed;
     [SerializeField] protected int gems;
+    [SerializeField] protected GameObject diamond;
+    protected GameObject[] diamonds;
 
     //waypoint variables
     [SerializeField] protected Transform pointA, pointB;
@@ -18,6 +20,7 @@ public abstract class Enemy : MonoBehaviour
     protected SpriteRenderer enemySpriteRenderer;
 
     protected Player player;
+    protected Diamond diamondScript;
 
     protected bool isHit = false;
     protected bool isDead = false;
@@ -116,6 +119,18 @@ public abstract class Enemy : MonoBehaviour
     {
         isDead = true;
         StartCoroutine(Die());
+    }
+
+    protected void SpawnDiamonds()
+    {
+        Instantiate(diamond, transform.position, Quaternion.identity);
+        diamonds = GameObject.FindGameObjectsWithTag("Diamond");
+        diamondScript = diamonds[diamonds.Length - 1].GetComponent<Diamond>();
+
+        if (diamondScript != null)
+        {
+            diamondScript.Gems(gems);
+        }
     }
 
     IEnumerator Die()

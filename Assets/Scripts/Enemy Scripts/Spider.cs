@@ -23,7 +23,11 @@ public class Spider : Enemy, IDamageable
         Health--;
 
         if (Health < 1f)
+        {
             DeathAnimation();
+            SpawnDiamonds();
+        }
+
     }
 
     protected override void EnemyMovement()

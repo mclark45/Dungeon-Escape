@@ -21,6 +21,9 @@ public class Skeleton : Enemy, IDamageable
         isHit = true;
 
         if (Health < 1)
+        {
             DeathAnimation();
+            SpawnDiamonds();
+        }
     }
 }
