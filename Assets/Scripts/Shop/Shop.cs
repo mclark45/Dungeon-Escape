@@ -72,9 +72,11 @@ public class Shop : MonoBehaviour
                 break;
             case 1: //boots of flight
                 _player.UsedGems(_costOfItem);
+                _player.BootsOfFlight();
                 break;
             case 2: //key to castle
                 _player.UsedGems(_costOfItem);
+                _player.hasKey = true;
                 break;
         }
     }

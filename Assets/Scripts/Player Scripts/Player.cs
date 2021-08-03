@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool _isAttacking = false;
     private bool _shopOpen = false;
     private float _horizontal;
+    public bool hasKey = false;
 
     public float Health { get; set; }
     [SerializeField] private float health = 4.0f;
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void PlayerMovement()
     {
-        _horizontal = CrossPlatformInputManager.GetAxis("Horizontal"); //Input.GetAxisRaw("Horizontal");
+        _horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal"); //Input.GetAxisRaw("Horizontal");
         _grounded = IsGrounded();
 
 
@@ -125,6 +126,11 @@ public class Player : MonoBehaviour, IDamageable
     public void ShopOpen(bool open)
     {
         _shopOpen = open;
+    }
+
+    public void BootsOfFlight()
+    {
+        _jumpForce = 10f;
     }
 
     IEnumerator ResetJumpRoutine()
