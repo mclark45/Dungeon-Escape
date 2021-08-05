@@ -69,6 +69,7 @@ public class Shop : MonoBehaviour
         {
             case 0: //flame sword
                 _player.UsedGems(_costOfItem);
+                _player.SwordColor();
                 break;
             case 1: //boots of flight
                 _player.UsedGems(_costOfItem);

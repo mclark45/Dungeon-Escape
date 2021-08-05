@@ -7,6 +7,7 @@ public class Player : MonoBehaviour, IDamageable
 {
     private Rigidbody2D _playerRigidBody;
     private PlayerAnimations _playerAnimations;
+    [SerializeField] private SpriteRenderer _swordSprite;
     [SerializeField] private float _jumpForce = 5.0f;
     [SerializeField] private float _speed = 2.5f;
     [SerializeField] private int _gems = 0;
@@ -131,6 +132,11 @@ public class Player : MonoBehaviour, IDamageable
     public void BootsOfFlight()
     {
         _jumpForce = 10f;
+    }
+
+    public void SwordColor()
+    {
+        _swordSprite.color = Color.red;
     }
 
     IEnumerator ResetJumpRoutine()
